@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "allowJs": true, // Do not ignore JS files
+    "module": "commonjs",
+    "target": "esnext",
+    "jsx": "preserve",
+    "lib": ["dom", "esnext"],
+    /**
+     * Root folder for absolute file resolution.
+     * TS starts looking from here for the files.
+     * 'gatsby-alias-imports' is needed so Gatsby and Webpack can resolve the files properly.
+     */
+    "baseUrl": "./src",
+    "noEmit": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src", "plugins", "gatsby-*.js"],
+  "exclude": ["node_modules", "public", ".cache"]
+}

@@ -1,0 +1,6 @@
+# These files can later be included in the source control,
+# once things get stable and the files get reliable
+
+*.ts
+*.graphql
+*.json

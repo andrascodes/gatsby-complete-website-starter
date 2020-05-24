@@ -8,6 +8,24 @@ module.exports = {
   /* Your site config here */
   plugins: [
     /**
+     * Generate TS type definitions for the GraphQL queries
+     */
+    {
+      resolve: `gatsby-plugin-typegen`,
+      options: {
+        emitSchema: {
+          'src/__generated__/gatsby-schema.graphql': true,
+          'src/__generated__/gatsby-introspection.json': true,
+        },
+        emitPluginDocuments: {
+          'src/__generated__/gatsby-plugin-documents.graphql': true,
+        },
+      },
+    },
+    /** Import statements relative to src/ */
+    `gatsby-alias-imports`,
+
+    /**
      * Handle Markdown files
      */
     {

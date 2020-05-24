@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import Header from '../components/Header';
+import Header from 'components/Header';
 
 export const pageQuery = graphql`
   fragment BlogPost on MarkdownRemark {

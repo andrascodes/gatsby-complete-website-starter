@@ -1,0 +1,37 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+
+    /**
+     * ESLint configuration
+     */
+    "eslint.packageManager": "yarn",
+
+    /**
+     * Prettier configuration
+     */
+    "prettier.semi": true,
+    "prettier.arrowParens": "avoid",
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "all"
+  },
+  "extensions": {
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      /** Configured through apollo.config.js **/
+      "apollographql.vscode-apollo"
+      /** Configured through .graphqlconfig.yml **/
+      // "prisma.vscode-graphql"
+    ]
+  }
+}
