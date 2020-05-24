@@ -13,8 +13,13 @@
   },
   "dependencies": {
     "gatsby": "^2.21.37",
+    "gatsby-plugin-netlify-cms": "^4.3.2",
+    "netlify-cms-app": "^2.12.12",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "netlify-cms-proxy-server": "^1.2.7"
   },
   "repository": {
     "type": "git",
