@@ -1,0 +1,23 @@
+{
+  "name": "gatsby-complete-website-starter",
+  "private": true,
+  "description": "A complete website starter for Gatbsy",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "clean": "gatsby clean",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "typecheck": "tsc -p ./tsconfig.json"
+  },
+  "dependencies": {
+    "gatsby": "^2.21.37",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrewszucs/gatsby-complete-website-starter"
+  }
+}
