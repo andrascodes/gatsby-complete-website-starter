@@ -8,6 +8,18 @@ module.exports = {
   /* Your site config here */
   plugins: [
     /**
+     * Handle Markdown files
+     */
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `content`,
+        path: `${__dirname}/content/pages`,
+      },
+    },
+    `gatsby-transformer-remark`,
+
+    /**
      * Netlify CMS
      *
      * Adds the /admin endpoint with authentication,
