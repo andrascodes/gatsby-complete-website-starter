@@ -4,7 +4,7 @@ export const COLLECTION_NAME = 'post';
 
 /**
  * TODO: Extend this type with the 'hint' prop
- * @type {import("netlify-cms-core").CmsCollection}
+ * @type {CmsCollection}
  */
 const post = {
   name: COLLECTION_NAME,
@@ -98,9 +98,11 @@ const post = {
   extension: 'md',
 
   /**
-   * Specifies a template for generating new filenames based on a file's creation date and `title` field.
+   * Specifies a template for generating new filenames based on a file's creation
+   * date and `title` field.
    * Can reference a field value by name: `{{title}}`
-   * if you have a field named `slug`, and would like to reference that field via `{{slug}}`,
+   * if you have a field named `slug`, and would like to reference that field
+   * via `{{slug}}`,
    * you can do so by adding the explicit `fields`. prefix, eg. `{{fields.slug}}`
    * - `{{slug}}` - url-sage version of the `title` field for the file
    * - `{{year}}-{{month}}-{{day}} {{hour}}:{{minute}}:{{second}}`
@@ -122,7 +124,6 @@ const post = {
       name: 'title',
       label: 'Title',
       required: true,
-      // @ts-ignore TODO: remove when type CmsCollection is extended
       hint: 'The title of the post.',
     },
     // slugField,
@@ -131,7 +132,6 @@ const post = {
       name: 'published',
       label: 'Published?',
       required: false,
-      // @ts-ignore TODO: remove when type CmsCollection is extended
       default: true,
     },
     // {
@@ -148,7 +148,6 @@ const post = {
       name: 'subtitle',
       label: 'Subtitle',
       required: false,
-      // @ts-ignore TODO: remove when type CmsCollection is extended
       hint: 'The text shown just below the Title or the Featured Image.',
     },
     {
@@ -156,7 +155,6 @@ const post = {
       name: 'description',
       label: 'Description',
       required: false,
-      // @ts-ignore TODO: remove when type CmsCollection is extended
       hint:
         'Will be used for SEO, and to describe the article. Leave empty for auto-generated',
     },
@@ -165,7 +163,6 @@ const post = {
       name: 'date',
       label: 'Publication date',
       required: true,
-      // @ts-ignore TODO: remove when type CmsCollection is extended
       hint:
         "When the article is published. Don't change if you edit it, we take can of that.",
     },
