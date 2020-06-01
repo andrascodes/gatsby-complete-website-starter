@@ -4,7 +4,7 @@ export const COLLECTION_NAME = 'post';
 
 /**
  * TODO: Extend this type with the 'hint' prop
- * @type {CmsCollection}
+ * @type {import("netlify-cms-core").CmsCollection}
  */
 const post = {
   name: COLLECTION_NAME,
