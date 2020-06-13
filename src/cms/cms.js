@@ -2,6 +2,9 @@ import CMS from 'netlify-cms-app';
 
 import collections from './collections';
 
+import richImage from './editor-components/richImage';
+import PostPreview from './preview-templates/PostPreview';
+
 // import "typeface-poppins";
 // import "assets/fonts/butler/main.css";
 
@@ -17,7 +20,7 @@ window.NETLIFY_CMS = true;
  * Registering, for each collection name, the custom preview
  * component
  */
-// CMS.registerPreviewTemplate("post", PostPreview);
+CMS.registerPreviewTemplate('post', PostPreview);
 // CMS.registerPreviewTemplate("news", PostPreview);
 // CMS.registerPreviewTemplate("expertNetwork", ExpertNetworkPreview);
 // CMS.registerPreviewTemplate("sectionsPage", SectionsPagePreview);
@@ -34,8 +37,7 @@ window.NETLIFY_CMS = true;
  * Registering markdown widgets
  * See https://www.netlifycms.org/docs/custom-widgets/#registereditorcomponent
  */
-// @ts-ignore
-// CMS.registerEditorComponent(customImage);
+CMS.registerEditorComponent(richImage);
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 

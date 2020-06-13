@@ -8,6 +8,51 @@ module.exports = {
   /* Your site config here */
   plugins: [
     /**
+     * Sources
+     */
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `content`,
+        path: `${__dirname}/content/pages`,
+      },
+    },
+
+    /**
+     * Handle Markdown files and Rehype
+     */
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    `gatsby-remark-images`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              /** Maximum width that we allow for our images. Content width is 750 and we add a bit more for zooming and images breaking */
+              maxWidth: 1200,
+              backgroundColor: 'transparent',
+              withWebp: false,
+              disableBgImageOnAlpha: true,
+              linkImagesToOriginal: false,
+              // Title attribute used as caption
+              showCaptions: false,
+            },
+          },
+          {
+            resolve: `gatsby-remark-smartypants`,
+            options: {
+              dashes: `oldschool`,
+            },
+          },
+          `gatsby-remark-autolink-headers`,
+        ],
+      },
+    },
+
+    /**
      * Generate TS type definitions for the GraphQL queries
      */
     {
@@ -24,18 +69,6 @@ module.exports = {
     },
     /** Import statements relative to src/ */
     `gatsby-alias-imports`,
-
-    /**
-     * Handle Markdown files
-     */
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `content`,
-        path: `${__dirname}/content/pages`,
-      },
-    },
-    `gatsby-transformer-remark`,
 
     /**
      * Netlify CMS

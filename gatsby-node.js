@@ -48,10 +48,14 @@ exports.onCreateNode = async ({
 };
 
 /** @type {import("gatsby").GatsbyNode["createPages"]} */
-exports.createPages = async ({ graphql, actions: { createPage } }) => {
+exports.createPages = async ({
+  graphql,
+  actions: { createPage },
+  reporter,
+}) => {
   const { data, errors } = await graphql(`
     {
-      allMarkdownRemark(limit: 1000) {
+      allMarkdownRemark {
         edges {
           node {
             id
@@ -68,7 +72,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   `);
 
   if (errors) {
-    errors.forEach(e => console.error(e.toString()));
+    errors.forEach(e => reporter.panicOnBuild(e.toString()));
     return Promise.reject(errors);
   }
 
