@@ -8,6 +8,11 @@ module.exports = {
   /* Your site config here */
   plugins: [
     /**
+     * Handle Markdown files
+     */
+    `gatsby-transformer-remark`,
+
+    /**
      * Generate TS type definitions for the GraphQL queries
      */
     {
@@ -35,7 +40,6 @@ module.exports = {
         path: `${__dirname}/content/pages`,
       },
     },
-    `gatsby-transformer-remark`,
 
     /**
      * Netlify CMS
@@ -64,4 +68,9 @@ module.exports = {
       },
     },
   ],
+  mapping: {
+    // Keep this in sync with the data structure
+    // Mapping post.author to author.email
+    'MarkdownRemark.frontmatter.author': `MarkdownRemark.frontmatter.email`,
+  },
 };
