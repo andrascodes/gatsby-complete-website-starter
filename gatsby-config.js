@@ -10,7 +10,43 @@ module.exports = {
     /**
      * Handle Markdown files
      */
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `content`,
+        path: `${__dirname}/content/pages`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `authors`,
+        path: `${__dirname}/content/authors`,
+      },
+    },
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     `gatsby-transformer-remark`,
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              /** Maximum width that we allow for our images. Content width is 750 and we add a bit more for zooming and images breaking */
+              maxWidth: 1200,
+              backgroundColor: 'transparent',
+              withWebp: false,
+              disableBgImageOnAlpha: true,
+              linkImagesToOriginal: false,
+              // Title attribute used as caption
+              showCaptions: false,
+            },
+          },
+        ],
+      },
+    },
 
     /**
      * Generate TS type definitions for the GraphQL queries
@@ -29,17 +65,6 @@ module.exports = {
     },
     /** Import statements relative to src/ */
     `gatsby-alias-imports`,
-
-    /**
-     * Handle Markdown files
-     */
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `content`,
-        path: `${__dirname}/content/pages`,
-      },
-    },
 
     /**
      * Netlify CMS

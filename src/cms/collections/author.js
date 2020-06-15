@@ -26,12 +26,6 @@ const author = {
       hint: 'Not shown publicly atm',
       required: true,
     },
-    {
-      name: 'title',
-      widget: 'string',
-      label: 'Title',
-      required: true,
-    },
 
     // Image Schema
     {
