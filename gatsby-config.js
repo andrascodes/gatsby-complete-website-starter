@@ -33,6 +33,13 @@ module.exports = {
         plugins: [
           `gatsby-remark-autolink-headers`,
           {
+            resolve: 'gatsby-remark-external-links',
+            options: {
+              target: '_blank',
+              rel: 'noopener noreferrer',
+            },
+          },
+          {
             resolve: 'gatsby-remark-images',
             options: {
               /** Maximum width that we allow for our images. Content width is 750 and we add a bit more for zooming and images breaking */
@@ -45,9 +52,11 @@ module.exports = {
               showCaptions: false,
             },
           },
+          `gatsby-remark-images-medium-zoom`,
         ],
       },
     },
+    `gatsby-plugin-catch-links`,
 
     /**
      * Generate TS type definitions for the GraphQL queries
