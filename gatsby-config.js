@@ -31,6 +31,12 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
+          {
+            resolve: `gatsby-remark-smartypants`,
+            options: {
+              dashes: `oldschool`,
+            },
+          },
           `gatsby-remark-autolink-headers`,
           {
             resolve: 'gatsby-remark-external-links',
