@@ -1,5 +1,11 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import rehypeReact from 'rehype-react';
+
+// @ts-ignore
+const renderAst = new rehypeReact({
+  createElement: React.createElement,
+}).Compiler;
 
 export const pageQuery = graphql`
   fragment PostAuthor on MarkdownRemark {
@@ -48,13 +54,7 @@ export default function Post({ data: { post } }) {
     fields: { dateModified },
   } = post;
 
-  return (
-    <PostTemplate
-      {...post}
-      // body={renderAst(htmlAst)}
-      body={'Post content'}
-    />
-  );
+  return <PostTemplate {...post} body={renderAst(htmlAst)} />;
 }
 
 export function PostTemplate(props) {
