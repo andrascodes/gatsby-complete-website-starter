@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import rehypeReact from 'rehype-react';
+import dayjs from 'dayjs';
 
 // @ts-ignore
 const renderAst = new rehypeReact({
@@ -27,7 +28,7 @@ export const pageQuery = graphql`
     frontmatter {
       title
       subtitle
-      date(formatString: "MMMM DD, YYYY")
+      date
       author {
         ...PostAuthor
       }
@@ -83,17 +84,22 @@ export function PostTemplate(props) {
         <div>
           <p>By {authorName}</p>
           <p>
-            {date} &middot; {timeToRead} min read
+            <time dateTime={dayjs(date).format('YYYY-MM-DD')}>
+              {dayjs(date).format('MMMM DD, YYYY')}
+            </time>{' '}
+            &middot; {timeToRead} min read
           </p>
         </div>
       </header>
-      <section>
-        <h2>Contents</h2>
-        <div
-          dangerouslySetInnerHTML={{ __html: tableOfContents }}
-          className="toc"
-        />
-      </section>
+      {tableOfContents && (
+        <section>
+          <h2>Contents</h2>
+          <div
+            dangerouslySetInnerHTML={{ __html: tableOfContents }}
+            className="toc"
+          />
+        </section>
+      )}
       <section>{body}</section>
     </article>
   );

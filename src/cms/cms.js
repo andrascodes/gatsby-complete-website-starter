@@ -1,6 +1,7 @@
 import CMS from 'netlify-cms-app';
 
 import collections from './collections';
+import PostPreview from './preview-templates/PostPreview';
 
 // import "typeface-poppins";
 // import "assets/fonts/butler/main.css";
@@ -17,7 +18,7 @@ window.NETLIFY_CMS = true;
  * Registering, for each collection name, the custom preview
  * component
  */
-// CMS.registerPreviewTemplate("post", PostPreview);
+CMS.registerPreviewTemplate('post', PostPreview);
 // CMS.registerPreviewTemplate("news", PostPreview);
 // CMS.registerPreviewTemplate("expertNetwork", ExpertNetworkPreview);
 // CMS.registerPreviewTemplate("sectionsPage", SectionsPagePreview);
