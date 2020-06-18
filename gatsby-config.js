@@ -8,6 +8,16 @@ module.exports = {
   /* Your site config here */
   plugins: [
     /**
+     * Styling
+     */
+    {
+      resolve: `gatsby-plugin-less`,
+      options: {
+        javascriptEnabled: true,
+      },
+    },
+
+    /**
      * Handle Markdown files
      */
     {
@@ -64,6 +74,11 @@ module.exports = {
     },
     `gatsby-plugin-catch-links`,
 
+    /**
+     * Generate typings for LESS modules
+     * Local plugin, see ./plugins
+     */
+    `gatsby-plugin-less-modules-typings`,
     /**
      * Generate TS type definitions for the GraphQL queries
      */

@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import rehypeReact from 'rehype-react';
 import dayjs from 'dayjs';
+import Layout from 'components/Layout';
 
 // @ts-ignore
 const renderAst = new rehypeReact({
@@ -77,30 +78,32 @@ export function PostTemplate(props) {
   } = props;
 
   return (
-    <article>
-      <header>
-        <h1>{title}</h1>
-        <p>{subtitle}</p>
-        <div>
-          <p>By {authorName}</p>
-          <p>
-            <time dateTime={dayjs(date).format('YYYY-MM-DD')}>
-              {dayjs(date).format('MMMM DD, YYYY')}
-            </time>{' '}
-            &middot; {timeToRead} min read
-          </p>
-        </div>
-      </header>
-      {tableOfContents && (
-        <section>
-          <h2>Contents</h2>
-          <div
-            dangerouslySetInnerHTML={{ __html: tableOfContents }}
-            className="toc"
-          />
-        </section>
-      )}
-      <section>{body}</section>
-    </article>
+    <Layout>
+      <article>
+        <header>
+          <h1>{title}</h1>
+          <p>{subtitle}</p>
+          <div>
+            <p>By {authorName}</p>
+            <p>
+              <time dateTime={dayjs(date).format('YYYY-MM-DD')}>
+                {dayjs(date).format('MMMM DD, YYYY')}
+              </time>{' '}
+              &middot; {timeToRead} min read
+            </p>
+          </div>
+        </header>
+        {tableOfContents && (
+          <section>
+            <h2>Contents</h2>
+            <div
+              dangerouslySetInnerHTML={{ __html: tableOfContents }}
+              className="toc"
+            />
+          </section>
+        )}
+        <section>{body}</section>
+      </article>
+    </Layout>
   );
 }

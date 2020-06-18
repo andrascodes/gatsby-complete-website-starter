@@ -38,8 +38,6 @@ const PostPreview = ({
   //     ? entry.getIn(['data', 'tags']).toJS()
   //     : [];
 
-  console.log(entry.getIn(['data', 'date']));
-
   return (
     <PostTemplate
       frontmatter={{

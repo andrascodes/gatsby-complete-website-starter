@@ -1,0 +1,6 @@
+{
+  "name": "gatsby-plugin-less-modules-typings",
+  "dependencies": {
+    "typings-for-css-modules-loader": "^1.7.0"
+  }
+}
