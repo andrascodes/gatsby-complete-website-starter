@@ -16,6 +16,12 @@ module.exports = {
         javascriptEnabled: true,
       },
     },
+    {
+      resolve: 'gatsby-plugin-antd',
+      options: {
+        style: true,
+      },
+    },
 
     /**
      * Handle Markdown files
