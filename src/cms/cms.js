@@ -6,6 +6,7 @@ import 'typeface-playfair-display';
 
 import collections from './collections';
 import PostPreview from './preview-templates/PostPreview';
+import RichImage from './editor-components/RichImage';
 
 // import "typeface-poppins";
 // import "assets/fonts/butler/main.css";
@@ -40,7 +41,7 @@ CMS.registerPreviewTemplate('post', PostPreview);
  * See https://www.netlifycms.org/docs/custom-widgets/#registereditorcomponent
  */
 // @ts-ignore
-// CMS.registerEditorComponent(customImage);
+CMS.registerEditorComponent(RichImage);
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 

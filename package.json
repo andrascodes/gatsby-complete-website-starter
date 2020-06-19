@@ -35,6 +35,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "rehype-react": "^6.0.0",
+    "showdown": "^1.9.1",
     "typeface-fira-sans": "^0.0.75",
     "typeface-playfair-display": "^1.1.4"
   },
