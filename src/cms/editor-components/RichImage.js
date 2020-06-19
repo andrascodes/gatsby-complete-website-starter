@@ -1,6 +1,7 @@
 import React from 'react';
 // Only imported in Netlify CMS, so this isn't added to the bundle
 import showdown from 'showdown';
+import RichImageWrapper from 'components/RichImageWrapper';
 
 const converter = new showdown.Converter();
 
@@ -14,7 +15,7 @@ const RichImage = {
   label: 'Rich image',
   id: 'richImage',
   // Helps Netlify CMS Recognize this block in the Markdown
-  pattern: /^<figure><img src="(.*?)" alt="(.*?)" \/><figcaption>(.*?)<\/figcaption><\/figure>$/,
+  pattern: /^<rich-image><img src="(.*?)" alt="(.*?)" \/><figcaption>(.*?)<\/figcaption><\/rich-image>$/,
   fromBlock: match => {
     // Once the fields have been matched in the Regex, we need to pass the fields for the
     // visual editor in a format they understand, so HTML -> markdown
@@ -32,7 +33,7 @@ const RichImage = {
   toBlock: ({ caption = '', image, alt = '' }) => {
     const captionHTML = converter.makeHtml(caption);
     /** This has to be in sync with our strict regex */
-    return `<figure><img src="${image}" alt="${alt}" /><figcaption>${captionHTML}</figcaption></figure>`;
+    return `<rich-image><img src="${image}" alt="${alt}" /><figcaption>${captionHTML}</figcaption></rich-image>`;
   },
   toPreview: ({ image, caption, alt }, getAsset, fields) => {
     const imageField = fields?.find(f => f.get('widget') === 'image');
@@ -42,14 +43,14 @@ const RichImage = {
       caption !== 'undefined' ? converter.makeHtml(caption) : '';
 
     return (
-      <figure>
+      <RichImageWrapper>
         <img src={src || ''} alt={alt} />
         <figcaption
           dangerouslySetInnerHTML={{
             __html: captionHTML,
           }}
         ></figcaption>
-      </figure>
+      </RichImageWrapper>
     );
   },
   fields: [

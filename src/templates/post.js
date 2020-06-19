@@ -3,10 +3,12 @@ import { graphql } from 'gatsby';
 import rehypeReact from 'rehype-react';
 import dayjs from 'dayjs';
 import Layout from 'components/Layout';
+import RichImageWrapper from 'components/RichImageWrapper';
 
 // @ts-ignore
 const renderAst = new rehypeReact({
   createElement: React.createElement,
+  components: { 'rich-image': RichImageWrapper },
 }).Compiler;
 
 export const pageQuery = graphql`
