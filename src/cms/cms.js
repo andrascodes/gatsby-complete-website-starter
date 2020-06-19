@@ -1,5 +1,9 @@
 import CMS from 'netlify-cms-app';
 
+// Fonts for the Previews
+import 'typeface-fira-sans';
+import 'typeface-playfair-display';
+
 import collections from './collections';
 import PostPreview from './preview-templates/PostPreview';
 

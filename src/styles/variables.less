@@ -4,7 +4,34 @@
     Overwrite Antd default styling by reassigning the Less variables:
     https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
 */
+@font-family: 'Playfair Display', serif;
 
+/*
+    Theme UI Polaris Preset
+    https://theme-ui.com/demo
+*/
+// Colors
+@text-color: #454f5b;
+@background-color: #fff;
+@primary-color: #5c6ac4;
+@secondary-color: #006fbb;
+@highlight-color: #47c1bf;
+@muted-color: #e6e6e6;
+@gray-color: #dfe3e8;
+@accent-color: #f49342;
+@darken-color: #00044c;
+// Dark mode
+@text-color-dark: #3e4155;
+@background-color-dark: #000639;
+@primary-color-dark: #9c6ade;
+@secondary-color-dark: #b4e1fa;
+@highlight-color-dark: #b7ecec;
+@muted-color-dark: #e6e6e6;
+
+/*
+    Typography.js Kirkham Theme
+    https://github.com/KyleAMathews/typography.js/blob/master/packages/typography-theme-kirkham/src/index.js
+*/
 @space-0: 0px;
 @space-1: 4.75px;
 @space-2: 9.5px;
@@ -20,13 +47,18 @@
 @font-size-4: 28.49282961545972px;
 @font-size-5: 38.699999999999996px;
 
-.heading {
+.standardSpacing {
   padding: @space-0;
   margin: @space-0;
   margin-bottom: @space-3;
+}
+
+.heading {
+  .standardSpacing;
   line-height: 1.1;
   font-weight: 700;
   font-family: 'Playfair Display', serif;
+  color: @text-color;
 }
 
 .body {
@@ -34,4 +66,101 @@
   font-weight: 400;
   font-size: @font-size-2;
   line-height: 1.44;
+  color: @text-color;
+  background-color: @background-color;
+}
+
+.img {
+  .standardSpacing;
+  max-width: 100%;
+}
+
+.list {
+  .standardSpacing;
+  list-style-position: outside;
+  list-style-image: none;
+  margin-left: @space-3;
+}
+
+.listItem {
+  margin-bottom: @space-2;
+  padding-left: @space-0;
+
+  // li: { mb: 2, pl: 0, ol: [Object], ul: [Object], p: [Object] },
+}
+
+.p {
+  .standardSpacing;
+}
+
+.table {
+  .standardSpacing;
+  border-collapse: collapse;
+  border-spacing: @space-0;
+  width: 100%;
+}
+
+.tableCell {
+  text-align: left;
+  border-bottom: 1px solid;
+  padding: @space-2 @space-1;
+}
+
+.th {
+  .tableCell;
+  // th: {
+  //   textAlign: 'left',
+  //   borderBottom: '1px solid',
+  //   px: 2,
+  //   py: 1,
+  //   ':first-child': [Object],
+  //   ':last-child': [Object],
+  // },
+}
+
+.td {
+  .tableCell;
+  margin-top: -1px;
+  // td: {
+  //   textAlign: 'left',
+  //   borderBottom: '1px solid',
+  //   px: 2,
+  //   py: 1,
+  //   mt: '-1px',
+  //   ':first-child': [Object],
+  //   ':last-child': [Object],
+  // },
+}
+
+.blockquote {
+  .standardSpacing;
+  margin-top: @space-3;
+}
+
+.hr {
+  .standardSpacing;
+  border: 0;
+  border-bottom: 1px solid;
+  margin-top: -1px;
+}
+
+.monospace {
+  font-size: 85%;
+  font-family: Menlo, monospace;
+}
+
+.pre {
+  .standardSpacing;
+  padding: @space-3;
+  .monospace;
+  overflow-x: auto;
+}
+
+.code {
+  .monospace;
+  color: inherit;
+}
+
+.boldFont {
+  font-weight: bold;
 }

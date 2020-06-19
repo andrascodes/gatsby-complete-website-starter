@@ -1,7 +1,9 @@
 @import '~styles/variables.less';
 
+// Page-wide theme - for the Markdown contents too
 .root {
   .body;
+
   h1,
   h2,
   h3,
@@ -27,5 +29,55 @@
   }
   h6 {
     font-size: @font-size-0;
+  }
+
+  img {
+    .img;
+  }
+
+  ul,
+  ol {
+    .list;
+  }
+
+  p {
+    .p;
+  }
+
+  table {
+    .table;
+  }
+
+  th {
+    .th;
+  }
+
+  td {
+    .td;
+  }
+
+  blockquote {
+    .blockquote;
+  }
+
+  hr {
+    .hr;
+  }
+
+  pre {
+    .pre;
+  }
+
+  code {
+    .code;
+  }
+
+  b,
+  strong {
+    .boldFont;
+  }
+
+  a {
+    color: @primary-color;
   }
 }
