@@ -12,6 +12,7 @@
     "typecheck": "tsc -p ./tsconfig.json"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "dayjs": "^1.8.28",
     "gatsby": "^2.21.37",
     "gatsby-alias-imports": "^1.0.4",
@@ -45,7 +46,8 @@
     "netlify-cms-proxy-server": "^1.2.7",
     "prettier": "2.0.5",
     "typescript": "^3.9.3",
-    "typings-for-css-modules-loader": "^1.7.0"
+    "typings-for-css-modules-loader": "^1.7.0",
+    "unist-util-visit": "^2.0.2"
   },
   "repository": {
     "type": "git",

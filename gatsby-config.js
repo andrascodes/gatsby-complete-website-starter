@@ -74,6 +74,7 @@ module.exports = {
               showCaptions: false,
             },
           },
+          `gatsby-remark-uwrap-html`,
           `gatsby-remark-images-medium-zoom`,
         ],
       },
