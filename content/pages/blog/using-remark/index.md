@@ -5,7 +5,7 @@ author: andrew0szucs@gmail.com
 date: 2020-06-15T21:59:01.937Z
 template: post
 ---
-<rich-image><img src="joshua-earle-234740.jpg" alt="man standing in front of a mountain" /><figcaption><p>Photo by <a href="https://unsplash.com/@joshuaearle">Joshua Earle</a> via <a href="https://unsplash.com/@joshuaearle?photo=-87JyMb9ZfU">Unsplash</a></p></figcaption></rich-image>
+<rich-image position="wide"><img src="joshua-earle-234740.jpg" alt="man standing in front of a mountain" /><figcaption><p>Photo by <a href="https://unsplash.com/@joshuaearle">Joshua Earle</a> via <a href="https://unsplash.com/@joshuaearle?photo=-87JyMb9ZfU">Unsplash</a></p></figcaption></rich-image>
 
 ***Note how all headlines below show an anchor link when you hover them?***\
 That's \[gatsby-remark-autolink-headers] hooking up all `MarkdownRemark` headers with anchor links for us.
@@ -280,7 +280,7 @@ You can also use raw HTML in your Markdown, and it'll mostly work pretty well.
   <dd>Is something people use sometimes.</dd>
 
   <dt>Markdown in HTML</dt>
-  <dd>Does \\\\\\\\\\\*not\\\\\\\\\\\* work \\\\\\\\\\\*\\\\\\\\\\\*very\\\\\\\\\\\*\\\\\\\\\\\* well. Use HTML <em>tags</em>.</dd>
+  <dd>Does \\\\\\\\\\\\*not\\\\\\\\\\\\* work \\\\\\\\\\\\*\\\\\\\\\\\\*very\\\\\\\\\\\\*\\\\\\\\\\\\* well. Use HTML <em>tags</em>.</dd>
 </dl>
 
 <a name="hr"></a>

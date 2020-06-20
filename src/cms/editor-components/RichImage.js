@@ -1,7 +1,9 @@
 import React from 'react';
 // Only imported in Netlify CMS, so this isn't added to the bundle
 import showdown from 'showdown';
-import RichImageWrapper from 'components/RichImageWrapper';
+import RichImageWrapper, {
+  RICH_IMAGE_POSITIONS,
+} from 'components/RichImageWrapper';
 
 const converter = new showdown.Converter();
 
@@ -15,27 +17,32 @@ const RichImage = {
   label: 'Rich image',
   id: 'richImage',
   // Helps Netlify CMS Recognize this block in the Markdown
-  pattern: /^<rich-image><img src="(.*?)" alt="(.*?)" \/><figcaption>(.*?)<\/figcaption><\/rich-image>$/,
+  pattern: /^<rich-image position="(.*?)"><img src="(.*?)" alt="(.*?)" \/><figcaption>(.*?)<\/figcaption><\/rich-image>$/,
   fromBlock: match => {
     // Once the fields have been matched in the Regex, we need to pass the fields for the
     // visual editor in a format they understand, so HTML -> markdown
     if (match) {
-      const caption = match[3];
-
+      const caption = match[4];
       const captionMarkdown = converter.makeMarkdown(caption);
       return {
-        image: match[1],
+        position: match[1],
+        image: match[2],
         caption: captionMarkdown,
-        alt: match[2],
+        alt: match[3],
       };
     }
   },
-  toBlock: ({ caption = '', image, alt = '' }) => {
+  toBlock: ({
+    caption = '',
+    image,
+    alt = '',
+    position = RICH_IMAGE_POSITIONS.TOP_BOTTOM,
+  }) => {
     const captionHTML = converter.makeHtml(caption);
     /** This has to be in sync with our strict regex */
-    return `<rich-image><img src="${image}" alt="${alt}" /><figcaption>${captionHTML}</figcaption></rich-image>`;
+    return `<rich-image position="${position}"><img src="${image}" alt="${alt}" /><figcaption>${captionHTML}</figcaption></rich-image>`;
   },
-  toPreview: ({ image, caption, alt }, getAsset, fields) => {
+  toPreview: ({ image, caption, alt, position }, getAsset, fields) => {
     const imageField = fields?.find(f => f.get('widget') === 'image');
     const src = getAsset(image, imageField);
 
@@ -43,7 +50,7 @@ const RichImage = {
       caption !== 'undefined' ? converter.makeHtml(caption) : '';
 
     return (
-      <RichImageWrapper>
+      <RichImageWrapper position={position}>
         <img src={src || ''} alt={alt} />
         <figcaption
           dangerouslySetInnerHTML={{
@@ -77,6 +84,12 @@ const RichImage = {
       widget: 'string',
       hint:
         "Appears in place of an image if it fails to load on a user's screen. Screen-reading tools use it to describe images to visually impaired readers. Search engines use it to better crawl and rank the website.",
+    },
+    {
+      label: 'Position',
+      name: 'position',
+      widget: 'select',
+      options: Object.values(RICH_IMAGE_POSITIONS),
     },
   ],
 };
