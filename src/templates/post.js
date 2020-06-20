@@ -4,6 +4,7 @@ import rehypeReact from 'rehype-react';
 import dayjs from 'dayjs';
 import Layout from 'components/Layout';
 import RichImageWrapper from 'components/RichImageWrapper';
+import PostWrapper from 'components/PostWrapper';
 
 // @ts-ignore
 const renderAst = new rehypeReact({
@@ -104,7 +105,7 @@ export function PostTemplate(props) {
             />
           </section>
         )}
-        <section>{body}</section>
+        <PostWrapper>{body}</PostWrapper>
       </article>
     </Layout>
   );
