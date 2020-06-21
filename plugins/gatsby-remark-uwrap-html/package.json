@@ -1,0 +1,6 @@
+{
+  "name": "gatsby-remark-uwrap-html",
+  "dependencies": {
+    "unist-util-visit": "^2.0.2"
+  }
+}

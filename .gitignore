@@ -73,3 +73,8 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+# Less Module type declaration files
+*.module.less.d.ts
+
+.netlify

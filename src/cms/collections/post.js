@@ -104,7 +104,7 @@ const post = {
    * if you have a field named `slug`, and would like to reference that field
    * via `{{slug}}`,
    * you can do so by adding the explicit `fields`. prefix, eg. `{{fields.slug}}`
-   * - `{{slug}}` - url-sage version of the `title` field for the file
+   * - `{{slug}}` - url-safe version of the `title` field for the file
    * - `{{year}}-{{month}}-{{day}} {{hour}}:{{minute}}:{{second}}`
    */
   // slug: "{{fields.slug}}",
@@ -134,15 +134,15 @@ const post = {
       required: false,
       default: true,
     },
-    // {
-    //   label: "Post Author",
-    //   name: "author",
-    //   widget: "relation",
-    //   collection: "people",
-    //   searchFields: ["name"],
-    //   valueField: "email",
-    //   displayFields: ["name"],
-    // },
+    {
+      label: 'Post Author',
+      name: 'author',
+      widget: 'relation',
+      collection: 'author',
+      searchFields: ['name'],
+      valueField: 'email',
+      displayFields: ['name'],
+    },
     {
       widget: 'string',
       name: 'subtitle',

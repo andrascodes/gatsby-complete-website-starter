@@ -1,3 +1,4 @@
-import post from "./post";
+import post from './post';
+import author from './author';
 
-export default [post];
+export default [post, author];
