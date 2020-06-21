@@ -5,11 +5,12 @@ import dayjs from 'dayjs';
 import Layout from 'components/Layout';
 import RichImageWrapper from 'components/RichImageWrapper';
 import PostWrapper from 'components/PostWrapper';
+import Divider from 'components/Divider';
 
 // @ts-ignore
 const renderAst = new rehypeReact({
   createElement: React.createElement,
-  components: { 'rich-image': RichImageWrapper },
+  components: { 'rich-image': RichImageWrapper, divider: Divider },
 }).Compiler;
 
 export const pageQuery = graphql`

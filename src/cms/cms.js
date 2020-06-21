@@ -7,6 +7,7 @@ import 'typeface-playfair-display';
 import collections from './collections';
 import PostPreview from './preview-templates/PostPreview';
 import RichImage from './editor-components/RichImage';
+import Divider from './editor-components/Divider';
 
 // import "typeface-poppins";
 // import "assets/fonts/butler/main.css";
@@ -40,8 +41,8 @@ CMS.registerPreviewTemplate('post', PostPreview);
  * Registering markdown widgets
  * See https://www.netlifycms.org/docs/custom-widgets/#registereditorcomponent
  */
-// @ts-ignore
 CMS.registerEditorComponent(RichImage);
+CMS.registerEditorComponent(Divider);
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 

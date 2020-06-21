@@ -36,7 +36,7 @@ const RichImage = {
     caption = '',
     image,
     alt = '',
-    position = RICH_IMAGE_POSITIONS.TOP_BOTTOM,
+    position = RICH_IMAGE_POSITIONS.TOP_BOTTOM.value,
   }) => {
     const captionHTML = converter.makeHtml(caption);
     /** This has to be in sync with our strict regex */
