@@ -7,6 +7,7 @@ import RichImageWrapper from 'components/RichImageWrapper';
 import PostWrapper from 'components/PostWrapper';
 import Divider from 'components/Divider';
 import Blockquote from 'components/Blockquote';
+import Pullquote from 'components/Pullquote';
 
 // @ts-ignore
 const renderAst = new rehypeReact({
@@ -15,6 +16,7 @@ const renderAst = new rehypeReact({
     'rich-image': RichImageWrapper,
     divider: Divider,
     blockquote: Blockquote,
+    pullquote: Pullquote,
   },
 }).Compiler;
 

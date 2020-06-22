@@ -44,7 +44,7 @@ One of the challenges I had when learning Gatsby was trying to understand the Ga
 
 To understand what these files are for, we must first understand how Gatsby works. Gatsby is a static site generator that pulls data from sources you provide and generates a website/app for you.
 
-Gatsby requires Node to be installed to run the Bootstrap and Build sequences. Under the hood, Gatsby uses Webpack to build and start a development server amongst other things.
+<pullquote><p>Gatsby requires Node to be installed to run the Bootstrap and Build sequences. <strong>Under the hood,</strong> Gatsby uses Webpack to build and start a development server amongst other things.</p></pullquote>
 
 ### Step 1
 

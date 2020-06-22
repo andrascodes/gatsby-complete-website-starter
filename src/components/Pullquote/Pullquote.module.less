@@ -1,0 +1,20 @@
+@import '~styles/variables.less';
+
+@margin-x-size-sm: 35px;
+@margin-x-size: 55px;
+
+.pullquote {
+  margin-top: @margin-x-size-sm;
+  padding-left: 30px;
+  font-size: @font-size-3;
+  font-style: italic;
+  line-height: 1.58;
+  margin-bottom: @margin-x-size-sm;
+
+  @media (min-width: @screen-sm) {
+    font-size: @font-size-4;
+    padding-left: 50px;
+    margin-top: @margin-x-size;
+    margin-bottom: @margin-x-size;
+  }
+}
