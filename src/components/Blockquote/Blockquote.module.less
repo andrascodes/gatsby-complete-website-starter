@@ -1,0 +1,20 @@
+@import '~styles/variables.less';
+
+@border-size: 3px;
+@padding-size: 20px;
+@margin-x-size: 38px;
+
+.blockquote {
+  margin-top: @margin-x-size;
+  border-left: @border-size solid @darken-color;
+  padding-left: @padding-size;
+  margin-left: -3vw;
+  font-size: @font-size-3;
+  font-style: italic;
+  line-height: 1.58;
+  margin-bottom: @margin-x-size;
+
+  @media (min-width: @screen-sm) {
+    margin-left: calc(-1 * (@padding-size + @border-size));
+  }
+}

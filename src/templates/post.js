@@ -6,11 +6,16 @@ import Layout from 'components/Layout';
 import RichImageWrapper from 'components/RichImageWrapper';
 import PostWrapper from 'components/PostWrapper';
 import Divider from 'components/Divider';
+import Blockquote from 'components/Blockquote';
 
 // @ts-ignore
 const renderAst = new rehypeReact({
   createElement: React.createElement,
-  components: { 'rich-image': RichImageWrapper, divider: Divider },
+  components: {
+    'rich-image': RichImageWrapper,
+    divider: Divider,
+    blockquote: Blockquote,
+  },
 }).Compiler;
 
 export const pageQuery = graphql`

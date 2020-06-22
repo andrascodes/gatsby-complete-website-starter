@@ -8,6 +8,7 @@ import collections from './collections';
 import PostPreview from './preview-templates/PostPreview';
 import RichImage from './editor-components/RichImage';
 import Divider from './editor-components/Divider';
+import Blockquote from './editor-components/Blockquote';
 
 // import "typeface-poppins";
 // import "assets/fonts/butler/main.css";
@@ -43,6 +44,7 @@ CMS.registerPreviewTemplate('post', PostPreview);
  */
 CMS.registerEditorComponent(RichImage);
 CMS.registerEditorComponent(Divider);
+CMS.registerEditorComponent(Blockquote);
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
