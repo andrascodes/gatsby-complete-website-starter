@@ -131,6 +131,14 @@ function getSelection({ targetElement, intersectingNodes }) {
   };
 }
 
+function clearSelection() {
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges();
+  } else if (document.selection) {
+    document.selection.empty();
+  }
+}
+
 function getWindowDimensions() {
   if (typeof window === 'undefined') return { width: 0, height: 0 };
 
@@ -298,13 +306,21 @@ export default function TextSelectionPopover({
         handleError(err);
       }
 
+      clearSelection();
       return document.body.removeChild(textArea);
     }
 
+    clearSelection();
     return navigator.clipboard.writeText(text).catch(handleError);
   }
 
-  const popoverProps = { left, top, show, text };
+  const popoverProps = {
+    left,
+    top,
+    show,
+    text,
+    onCopyButtonClick: handleCopyButtonClick,
+  };
 
   return renderPopover ? (
     renderPopover(popoverProps)
