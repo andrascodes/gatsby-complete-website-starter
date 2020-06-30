@@ -8,6 +8,7 @@ import PostWrapper from 'components/PostWrapper';
 import Divider from 'components/Divider';
 import Blockquote from 'components/Blockquote';
 import Pullquote from 'components/Pullquote';
+import PostSection from 'components/PostSection';
 
 // @ts-ignore
 const renderAst = new rehypeReact({
@@ -113,7 +114,7 @@ export function PostTemplate(props) {
             />
           </section>
         )}
-        <PostWrapper>{body}</PostWrapper>
+        <PostSection body={body} />
       </article>
     </Layout>
   );
