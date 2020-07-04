@@ -4,7 +4,6 @@
   background-color: @background-color-dark;
   color: @primary-color-dark;
   border-radius: 5px;
-  padding: 7px 0 7px 0;
   z-index: 1;
   font-size: 18px;
   font-weight: 600;
@@ -16,33 +15,9 @@
   align-items: center;
   justify-content: flex-end;
 
-  .shareLinks {
-    flex: 1;
-    padding-left: 16px;
-  }
-
-  .copyLink {
+  .copyButtonContainer {
     padding: 0 10px;
     border-left: 2px solid fade(@primary-color-dark, 50%);
-
-    .copyButton {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      color: @primary-color-dark;
-      &:hover,
-      &:focus {
-        color: lighten(@primary-color-dark, 5%);
-      }
-      &:active {
-        color: darken(@primary-color-dark, 5%);
-      }
-
-      :global(.anticon) {
-        font-size: 20px;
-      }
-    }
   }
 }
 

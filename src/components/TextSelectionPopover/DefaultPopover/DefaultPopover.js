@@ -1,13 +1,21 @@
 import React from 'react';
-import { Button } from 'antd';
-import { CopyOutlined } from '@ant-design/icons';
 
 import styles from './DefaultPopover.module.less';
 
 export const MENU_WIDTH = 225;
 export const MENU_HEIGHT = 46;
 
-export default function DefaultPopover({ left, top, show, onCopyButtonClick }) {
+export default function DefaultPopover({
+  left,
+  top,
+  show,
+  text,
+  onCopyButtonClick,
+  renderPopoverContent,
+  renderCopyButton,
+  menuWidth,
+  menuHeight,
+}) {
   return (
     <div
       style={{
@@ -15,20 +23,15 @@ export default function DefaultPopover({ left, top, show, onCopyButtonClick }) {
         left: `${left}px`,
         top: `${top}px`,
         display: show ? 'flex' : 'none',
-        width: MENU_WIDTH,
-        height: MENU_HEIGHT,
+        width: menuWidth || MENU_WIDTH,
+        height: menuHeight || MENU_HEIGHT,
       }}
       className={styles.popover}
     >
       <div className={styles.actionsContainer}>
-        <div className={styles.shareLinks}>Popover</div>
-        <div className={styles.copyLink}>
-          <Button
-            className={styles.copyButton}
-            type="link"
-            icon={<CopyOutlined />}
-            onClick={onCopyButtonClick}
-          />
+        {renderPopoverContent && renderPopoverContent({ text })}
+        <div className={styles.copyButtonContainer}>
+          {renderCopyButton && renderCopyButton({ onCopyButtonClick })}
         </div>
       </div>
       <div className={styles.arrow} />

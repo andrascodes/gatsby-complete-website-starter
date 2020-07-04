@@ -6,3 +6,33 @@
     .maxWidthContainer;
   }
 }
+
+.shareLabel {
+  margin-right: 10px;
+}
+
+.shareLinks {
+  flex: 1;
+  padding-left: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.popoverButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: @primary-color-dark;
+  &:hover,
+  &:focus {
+    color: lighten(@primary-color-dark, 5%);
+  }
+  &:active {
+    color: darken(@primary-color-dark, 5%);
+  }
+
+  :global(.anticon) {
+    font-size: 20px;
+  }
+}
