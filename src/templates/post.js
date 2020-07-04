@@ -2,13 +2,15 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import rehypeReact from 'rehype-react';
 import dayjs from 'dayjs';
+
 import Layout from 'components/Layout';
 import RichImageWrapper from 'components/RichImageWrapper';
-import PostWrapper from 'components/PostWrapper';
 import Divider from 'components/Divider';
 import Blockquote from 'components/Blockquote';
 import Pullquote from 'components/Pullquote';
 import PostSection from 'components/PostSection';
+import useSiteMetadata from 'hooks/useSiteMetadata';
+import concatURL from 'utils';
 
 // @ts-ignore
 const renderAst = new rehypeReact({
@@ -62,13 +64,21 @@ export const pageQuery = graphql`
   }
 `;
 
-export default function Post({ data: { post } }) {
+export default function Post({ location, data: { post } }) {
   const {
     htmlAst,
     fields: { dateModified },
   } = post;
 
-  return <PostTemplate {...post} body={renderAst(htmlAst)} />;
+  const { siteUrl } = useSiteMetadata();
+
+  return (
+    <PostTemplate
+      {...post}
+      absolutePath={concatURL(siteUrl, location.pathname)}
+      body={renderAst(htmlAst)}
+    />
+  );
 }
 
 export function PostTemplate(props) {
@@ -87,6 +97,7 @@ export function PostTemplate(props) {
       },
     },
     body,
+    absolutePath,
   } = props;
 
   return (
@@ -114,7 +125,7 @@ export function PostTemplate(props) {
             />
           </section>
         )}
-        <PostSection body={body} />
+        <PostSection body={body} absolutePath={absolutePath} />
       </article>
     </Layout>
   );

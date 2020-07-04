@@ -4,7 +4,9 @@
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
 
+/** @type {import("gatsby").GatsbyConfig} */
 module.exports = {
+  siteMetadata: require('./site-metadata.json'),
   /* Your site config here */
   plugins: [
     /**
