@@ -75,7 +75,7 @@ export default function Post({ location, data: { post } }) {
   return (
     <PostTemplate
       {...post}
-      absolutePath={concatURL(siteUrl, location.pathname)}
+      postLink={concatURL(siteUrl, location.pathname)}
       body={renderAst(htmlAst)}
     />
   );
@@ -97,7 +97,7 @@ export function PostTemplate(props) {
       },
     },
     body,
-    absolutePath,
+    postLink,
   } = props;
 
   return (
@@ -125,7 +125,7 @@ export function PostTemplate(props) {
             />
           </section>
         )}
-        <PostSection body={body} absolutePath={absolutePath} />
+        <PostSection body={body} postLink={postLink} />
       </article>
     </Layout>
   );

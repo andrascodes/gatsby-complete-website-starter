@@ -195,10 +195,6 @@ export default function TextSelectionPopover({
   excludeQuery,
   excludeElements,
   renderPopover,
-  renderPopoverContent,
-  renderCopyButton,
-  menuWidth,
-  menuHeight,
 }) {
   const [text, setText] = useState('');
   const [{ left, top, show }, setPosition] = useState(DEFAULT_POSITION);
@@ -324,15 +320,7 @@ export default function TextSelectionPopover({
     show,
     text,
     onCopyButtonClick: handleCopyButtonClick,
-    renderPopoverContent,
-    renderCopyButton,
-    menuWidth,
-    menuHeight,
   };
 
-  return renderPopover ? (
-    renderPopover(popoverProps)
-  ) : (
-    <DefaultPopover {...popoverProps} />
-  );
+  return renderPopover(popoverProps);
 }
