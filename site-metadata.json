@@ -1,3 +1,10 @@
 {
-  "siteUrl": "https://andrasszucs.me"
+  "siteUrl": "https://andrasszucs.me",
+  "sharingButtons": [
+    "FACEBOOK",
+    "TWITTER",
+    "LINKEDIN",
+    "PINTEREST"
+  ],
+  "social": []
 }
