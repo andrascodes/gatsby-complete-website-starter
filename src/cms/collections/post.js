@@ -1,4 +1,5 @@
 // import { getImageSchema, slugField } from "./utils";
+import { CMSImageSchema } from './schemas';
 
 export const COLLECTION_NAME = 'post';
 
@@ -128,11 +129,11 @@ const post = {
     },
     // slugField,
     {
-      widget: 'hidden',
-      name: 'published',
-      label: 'Published?',
+      widget: 'string',
+      name: 'subtitle',
+      label: 'Subtitle',
       required: false,
-      default: true,
+      hint: 'The text shown just below the Title or the Featured Image.',
     },
     {
       label: 'Post Author',
@@ -144,12 +145,19 @@ const post = {
       displayFields: ['name'],
     },
     {
-      widget: 'string',
-      name: 'subtitle',
-      label: 'Subtitle',
-      required: false,
-      hint: 'The text shown just below the Title or the Featured Image.',
+      widget: 'datetime',
+      name: 'date',
+      label: 'Publication date',
+      required: true,
+      hint:
+        "When the article is published. Don't change if you edit it, we take can of that.",
     },
+    CMSImageSchema({
+      name: 'featuredImage',
+      label: 'Featured image',
+      hint: 'The image used in thumbnails, SEO and Social Media sharing cards.',
+      collapsed: true,
+    }),
     {
       widget: 'text',
       name: 'description',
@@ -159,12 +167,20 @@ const post = {
         'Will be used for SEO, and to describe the article. Leave empty for auto-generated',
     },
     {
-      widget: 'datetime',
-      name: 'date',
-      label: 'Publication date',
-      required: true,
+      widget: 'list',
+      name: 'hashtags',
+      label: 'Hashtags for Social Media sharing',
+      required: false,
       hint:
-        "When the article is published. Don't change if you edit it, we take can of that.",
+        'Hashtags to be included in the description when someone shares this post on Social Media. Omit a preceding “#” from each hashtag.',
+      fields: [
+        {
+          name: 'hashtag',
+          label: 'Hashtag',
+          widget: 'string',
+          required: true,
+        },
+      ],
     },
     // {
     //   label: "Tags",
@@ -202,20 +218,25 @@ const post = {
     //   collapsed: true,
     // }),
     {
-      widget: 'hidden',
-      name: 'template',
-      label: 'Template',
-      required: true,
-      // @ts-ignore TODO: remove when type CmsCollection is extended
-      default: COLLECTION_NAME,
-    },
-    {
       widget: 'markdown',
       name: 'body',
       label: 'Content',
       required: true,
-      // @ts-ignore TODO: remove when type CmsCollection is extended
       hint: 'Page content',
+    },
+    {
+      widget: 'hidden',
+      name: 'published',
+      label: 'Published?',
+      required: false,
+      default: true,
+    },
+    {
+      widget: 'hidden',
+      name: 'template',
+      label: 'Template',
+      required: true,
+      default: COLLECTION_NAME,
     },
   ],
   /**

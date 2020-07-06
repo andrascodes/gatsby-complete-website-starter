@@ -9,8 +9,8 @@ import Divider from 'components/Divider';
 import Blockquote from 'components/Blockquote';
 import Pullquote from 'components/Pullquote';
 import PostSection from 'components/PostSection';
-import useSiteMetadata from 'hooks/useSiteMetadata';
 import concatURL from 'utils';
+import { PostContext } from 'shared/contexts';
 
 // @ts-ignore
 const renderAst = new rehypeReact({
@@ -43,9 +43,36 @@ export const pageQuery = graphql`
     frontmatter {
       title
       subtitle
-      date
       author {
         ...PostAuthor
+      }
+      date
+      featuredImage {
+        image {
+          childImageSharp {
+            resize(
+              # Center crop
+              fit: CONTAIN
+              cropFocus: CENTER
+              width: 1200
+              height: 630
+              # Fill the square with white
+              background: "white"
+            ) {
+              src
+              width
+              height
+            }
+          }
+          extension
+          publicURL
+        }
+        alt
+        caption
+      }
+      description
+      hashtags {
+        hashtag
       }
     }
     timeToRead
@@ -61,27 +88,45 @@ export const pageQuery = graphql`
     post: markdownRemark(id: { eq: $id }) {
       ...BlogPost
     }
+    site {
+      siteMetadata {
+        ...Metadata
+        ...SocialSharingConfig
+      }
+    }
   }
 `;
 
-export default function Post({ location, data: { post } }) {
+/**
+ * @param {object} props
+ * @prop {Location} props.location
+ * @prop {GatsbyTypes.PostQuery} props.data
+ */
+export default function Post({ location, data: { post, site } }) {
   const {
     htmlAst,
     fields: { dateModified },
   } = post;
 
-  const { siteUrl } = useSiteMetadata();
+  const { siteMetadata } = site;
 
   return (
     <PostTemplate
-      {...post}
-      postLink={concatURL(siteUrl, location.pathname)}
+      post={post}
+      siteMetadata={siteMetadata}
       body={renderAst(htmlAst)}
     />
   );
 }
 
-export function PostTemplate(props) {
+/**
+ * @param {object} props
+ * @prop {GatsbyTypes.BlogPostFragment} props.post
+ * @prop {GatsbyTypes.SiteSiteMetadata} props.siteMetadata
+ * @prop {string} props.postLink
+ * @prop {object} props.body
+ */
+export function PostTemplate({ post, siteMetadata, body }) {
   const {
     timeToRead,
     tableOfContents,
@@ -96,37 +141,43 @@ export function PostTemplate(props) {
         },
       },
     },
-    body,
-    postLink,
-  } = props;
+  } = post;
 
+  /**
+   * TODO:
+   * - Add sharing buttons on top and bottom of post
+   * - Add proper Table of Contents that follows the scroll and shows progress
+   * - Add Author information section
+   */
   return (
-    <Layout>
-      <article>
-        <header>
-          <h1>{title}</h1>
-          <p>{subtitle}</p>
-          <div>
-            <p>By {authorName}</p>
-            <p>
-              <time dateTime={dayjs(date).format('YYYY-MM-DD')}>
-                {dayjs(date).format('MMMM DD, YYYY')}
-              </time>{' '}
-              &middot; {timeToRead} min read
-            </p>
-          </div>
-        </header>
-        {tableOfContents && (
-          <section>
-            <h2>Contents</h2>
-            <div
-              dangerouslySetInnerHTML={{ __html: tableOfContents }}
-              className="toc"
-            />
-          </section>
-        )}
-        <PostSection body={body} postLink={postLink} />
-      </article>
-    </Layout>
+    <PostContext.Provider value={{ post, siteMetadata }}>
+      <Layout>
+        <article>
+          <header>
+            <h1>{title}</h1>
+            <p>{subtitle}</p>
+            <div>
+              <p>By {authorName}</p>
+              <p>
+                <time dateTime={dayjs(date).format('YYYY-MM-DD')}>
+                  {dayjs(date).format('MMMM DD, YYYY')}
+                </time>{' '}
+                &middot; {timeToRead} min read
+              </p>
+            </div>
+          </header>
+          {tableOfContents && (
+            <section>
+              <h2>Contents</h2>
+              <div
+                dangerouslySetInnerHTML={{ __html: tableOfContents }}
+                className="toc"
+              />
+            </section>
+          )}
+          <PostSection body={body} />
+        </article>
+      </Layout>
+    </PostContext.Provider>
   );
 }

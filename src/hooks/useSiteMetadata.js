@@ -1,22 +1,34 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
+export const query = graphql`
+  fragment Metadata on SiteSiteMetadata {
+    siteUrl
+  }
+
+  fragment SocialSharingConfig on SiteSiteMetadata {
+    sharingButtons
+    socialAccounts {
+      type
+      url
+      accountHandle
+    }
+  }
+
+  query SiteMetadata {
+    site {
+      siteMetadata {
+        ...Metadata
+        ...SocialSharingConfig
+      }
+    }
+  }
+`;
+
 /**
  * Get the site metadata
  */
-const useSiteMetadata = () => {
+export default function useSiteMetadata() {
   /** @type {GatsbyTypes.SiteMetadataQuery} */
-  const { site } = useStaticQuery(
-    graphql`
-      query SiteMetadata {
-        site {
-          siteMetadata {
-            siteUrl
-          }
-        }
-      }
-    `,
-  );
+  const { site } = useStaticQuery(query);
   return site.siteMetadata;
-};
-
-export default useSiteMetadata;
+}

@@ -1,5 +1,9 @@
 import { SOCIAL_MEDIA_ACCOUNT_TYPES } from 'shared/constants';
 
+const SOCIAL_MEDIA_ACCOUNT_TYPE_OPTIONS = Object.values(
+  SOCIAL_MEDIA_ACCOUNT_TYPES,
+);
+
 /** @type {import("netlify-cms-core").CmsCollectionFile} */
 export default {
   name: 'siteMetadata',
@@ -15,7 +19,7 @@ export default {
     },
     {
       widget: 'list',
-      name: 'social',
+      name: 'socialAccounts',
       label: 'Social Media Accounts',
       required: false,
       hint: 'List of Social Media accounts',
@@ -24,7 +28,7 @@ export default {
           name: 'type',
           label: 'Social Media site',
           widget: 'select',
-          options: Object.values(SOCIAL_MEDIA_ACCOUNT_TYPES),
+          options: SOCIAL_MEDIA_ACCOUNT_TYPE_OPTIONS,
           required: true,
         },
         {
@@ -47,9 +51,9 @@ export default {
       name: 'sharingButtons',
       label: 'Social Media sharing buttons',
       widget: 'select',
-      options: Object.keys(SOCIAL_MEDIA_ACCOUNT_TYPES)
-        .map(key => ({ label: SOCIAL_MEDIA_ACCOUNT_TYPES[key], value: key }))
-        .filter(({ label }) => label !== SOCIAL_MEDIA_ACCOUNT_TYPES.INSTAGRAM),
+      options: SOCIAL_MEDIA_ACCOUNT_TYPE_OPTIONS.filter(
+        type => type !== SOCIAL_MEDIA_ACCOUNT_TYPES.INSTAGRAM,
+      ),
       required: true,
       multiple: true,
       hint: 'Which social media sharing buttons to show on the blog posts',
