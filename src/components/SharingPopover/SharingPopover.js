@@ -1,30 +1,52 @@
-import React from 'react';
-import { Button } from 'antd';
-import {
-  FacebookFilled,
-  TwitterOutlined,
-  LinkedinFilled,
-  CopyOutlined,
-} from '@ant-design/icons';
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  LinkedinShareButton,
-} from 'react-share';
+import React, { useContext } from 'react';
+
+import { PostContext } from 'shared/contexts';
+import ShareButton from 'components/ShareButton';
 
 import styles from './SharingPopover.module.less';
+import concatURL from 'utils';
 
 export const POPOVER_WIDTH = 232;
 export const POPOVER_HEIGHT = 46;
 
+/**
+ * @param {object} props
+ * @prop {number} props.left
+ * @prop {number} props.top
+ * @prop {Boolean} props.show
+ * @prop {string} props.text
+ * @prop {() => any} props.onCopyButtonClick
+ */
 export default function SharingPopover({
   left,
   top,
   show,
   text,
   onCopyButtonClick,
-  postLink,
 }) {
+  const { post, siteMetadata } = useContext(PostContext);
+
+  const { siteUrl, sharingButtons, socialAccounts } = siteMetadata;
+  const { description, hashtags, featuredImage } = post.frontmatter;
+  const featuredImageSrc = featuredImage.image.childImageSharp.resize.src;
+
+  const postLink = concatURL(siteUrl, location.pathname);
+  const media = concatURL(siteUrl, featuredImageSrc);
+
+  const sharingButtonProps = sharingButtons.map(name => ({
+    type: name,
+    accounts: socialAccounts
+      .filter(({ type }) => type === name)
+      .map(({ accountHandle }) => accountHandle),
+    postLink,
+    text,
+    description,
+    hashtags: Array.isArray(hashtags)
+      ? hashtags.map(({ hashtag }) => hashtag)
+      : [],
+    media,
+  }));
+
   return (
     <div
       style={{
@@ -40,36 +62,12 @@ export default function SharingPopover({
       <div className={styles.actionsContainer}>
         <div className={styles.shareLinks}>
           <span className={styles.shareLabel}>Share:</span>
-          <FacebookShareButton url={postLink} quote={text}>
-            <Button
-              className={styles.popoverButton}
-              type="link"
-              icon={<FacebookFilled />}
-            />
-          </FacebookShareButton>
-          <TwitterShareButton url={postLink} title={text}>
-            <Button
-              className={styles.popoverButton}
-              type="link"
-              icon={<TwitterOutlined />}
-            />
-          </TwitterShareButton>
-          {/* LinkedIn sharing doesn't work unless the URL exists */}
-          <LinkedinShareButton url={postLink}>
-            <Button
-              className={styles.popoverButton}
-              type="link"
-              icon={<LinkedinFilled />}
-            />
-          </LinkedinShareButton>
+          {sharingButtonProps.map(props => (
+            <ShareButton {...props} />
+          ))}
         </div>
         <div className={styles.copyButtonContainer}>
-          <Button
-            className={styles.popoverButton}
-            type="link"
-            icon={<CopyOutlined />}
-            onClick={onCopyButtonClick}
-          />
+          <ShareButton type="copy" onClick={onCopyButtonClick} />
         </div>
       </div>
       <div className={styles.arrow} />

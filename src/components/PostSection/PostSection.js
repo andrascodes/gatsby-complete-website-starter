@@ -8,24 +8,31 @@ import SharingPopover, {
 
 import styles from './PostSection.module.less';
 
-export default function PostSection({ body, postLink }) {
+/**
+ * @param {object} props
+ * @prop {object} props.body
+ */
+export default function PostSection({ body }) {
   const textSelectionTargetRef = useRef(null);
 
   return (
     <section ref={textSelectionTargetRef} className={styles.postWrapper}>
       {body}
-      <TextSelectionPopover
-        targetRef={textSelectionTargetRef}
-        customPosition={({ targetElement }) => ({
-          selectionArea: targetElement.querySelector('div > p'),
-          xOffset: POPOVER_WIDTH,
-          yOffset: POPOVER_HEIGHT,
-        })}
-        excludeQuery="pre, figure, img"
-        renderPopover={props => (
-          <SharingPopover {...props} postLink={postLink} />
-        )}
-      />
+      {
+        //@ts-ignore
+        !window.NETLIFY_CMS && (
+          <TextSelectionPopover
+            targetRef={textSelectionTargetRef}
+            customPosition={({ targetElement }) => ({
+              selectionArea: targetElement.querySelector('div > p'),
+              xOffset: POPOVER_WIDTH,
+              yOffset: POPOVER_HEIGHT,
+            })}
+            excludeQuery="pre, figure, img"
+            renderPopover={props => <SharingPopover {...props} />}
+          />
+        )
+      }
     </section>
   );
 }

@@ -40,17 +40,19 @@ const PostPreview = ({
 
   return (
     <PostTemplate
-      frontmatter={{
-        title: entry.getIn(['data', 'title']),
-        subtitle: entry.getIn(['data', 'subtitle']),
-        date: entry.getIn(['data', 'date']),
-        author: {
-          frontmatter: {
-            name: authorEntry.get('name'),
+      post={{
+        frontmatter: {
+          title: entry.getIn(['data', 'title']),
+          subtitle: entry.getIn(['data', 'subtitle']),
+          date: entry.getIn(['data', 'date']),
+          author: {
+            frontmatter: {
+              name: authorEntry.get('name'),
+            },
           },
         },
+        timeToRead: 8,
       }}
-      timeToRead={8}
       body={widgetFor('body')}
     />
   );

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import DefaultPopover from './DefaultPopover';
 
 const DEFAULT_POSITION = {
   left: 0,
