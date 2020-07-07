@@ -11,6 +11,6 @@ export const SOCIAL_MEDIA_ACCOUNT_TYPES = {
   LINKEDIN: 'Linkedin',
   /** This type is used to represent a Instagram account. */
   INSTAGRAM: 'Instagram',
-  /** This type is used to represent a Pinterest account. */
-  PINTEREST: 'Pinterest',
+  /** This type is used to represent a Reddit account. */
+  REDDIT: 'Reddit',
 };

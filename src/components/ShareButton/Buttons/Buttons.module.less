@@ -1,20 +1,26 @@
 @import '~styles/variables.less';
-
-.popoverButton {
+.shareButton {
   display: flex;
   align-items: center;
   justify-content: center;
+  outline: none;
 
-  color: @primary-color-dark;
-  &:hover,
-  &:focus {
+  .popoverButton {
+    &:global(.anticon) {
+      font-size: 20px;
+    }
+
+    color: @primary-color-dark;
+  }
+
+  &:hover .popoverButton,
+  &:focus .popoverButton {
     color: lighten(@primary-color-dark, 5%);
   }
-  &:active {
+  &:active .popoverButton {
     color: darken(@primary-color-dark, 5%);
   }
 
-  :global(.anticon) {
-    font-size: 20px;
+  .defaultButton {
   }
 }
