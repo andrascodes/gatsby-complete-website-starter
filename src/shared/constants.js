@@ -8,7 +8,7 @@ export const SOCIAL_MEDIA_ACCOUNT_TYPES = {
   /** This type is used to represent a Twitter account. */
   TWITTER: 'Twitter',
   /** This type is used to represent a LinkedIn account. */
-  LINKEDIN: 'Linkedin',
+  LINKEDIN: 'LinkedIn',
   /** This type is used to represent a Instagram account. */
   INSTAGRAM: 'Instagram',
   /** This type is used to represent a Reddit account. */

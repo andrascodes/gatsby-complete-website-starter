@@ -53,7 +53,7 @@ const PostPreview = ({
         },
         timeToRead: 8,
       }}
-      seoConfig={['Facebook', 'Twitter', 'LinkedIn']}
+      seoConfig={{ sharingButtons: ['Facebook', 'Twitter', 'LinkedIn'] }}
       body={widgetFor('body')}
     />
   );

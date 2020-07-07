@@ -14,6 +14,7 @@ import { PostContext } from 'shared/contexts';
 
 import useSiteMetadata from 'hooks/useSiteMetadata';
 import useSEOConfig from 'hooks/useSEOConfig';
+import ShareButton from 'components/ShareButton';
 
 // @ts-ignore
 const renderAst = new rehypeReact({
@@ -186,9 +187,11 @@ export function PostTemplate({ post, seoConfig, postLink, body }) {
                 </time>{' '}
                 &middot; {timeToRead} min read
               </p>
-              {/* <div>
-                <ShareButton  />
-              </div> */}
+              <div style={{ display: 'flex' }}>
+                {shareButtonProps.map(props => (
+                  <ShareButton {...props} />
+                ))}
+              </div>
             </div>
           </header>
           {tableOfContents && (

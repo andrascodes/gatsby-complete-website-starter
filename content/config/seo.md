@@ -6,7 +6,7 @@ socialAccounts:
 sharingButtons:
   - Facebook
   - Twitter
-  - Linkedin
+  - LinkedIn
   - Reddit
 identifier: seo
 ---
