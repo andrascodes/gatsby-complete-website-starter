@@ -1,10 +1,9 @@
 import React from 'react';
 
 /**
- * @type {{ post: GatsbyTypes.BlogPostFragment, siteMetadata: GatsbyTypes.SiteSiteMetadata }}
+ * @type {{ shareButtonProps: ShareButton.Props[] }}
  */
 const defaultPostState = {
-  post: undefined,
-  siteMetadata: undefined,
+  shareButtonProps: [],
 };
 export const PostContext = React.createContext(defaultPostState);

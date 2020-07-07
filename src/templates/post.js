@@ -12,6 +12,9 @@ import PostSection from 'components/PostSection';
 import concatURL from 'utils';
 import { PostContext } from 'shared/contexts';
 
+import useSiteMetadata from 'hooks/useSiteMetadata';
+import useSEOConfig from 'hooks/useSEOConfig';
+
 // @ts-ignore
 const renderAst = new rehypeReact({
   createElement: React.createElement,
@@ -88,12 +91,6 @@ export const pageQuery = graphql`
     post: markdownRemark(id: { eq: $id }) {
       ...BlogPost
     }
-    site {
-      siteMetadata {
-        ...Metadata
-        ...SocialSharingConfig
-      }
-    }
   }
 `;
 
@@ -102,18 +99,21 @@ export const pageQuery = graphql`
  * @prop {Location} props.location
  * @prop {GatsbyTypes.PostQuery} props.data
  */
-export default function Post({ location, data: { post, site } }) {
+export default function Post({ location, data: { post } }) {
   const {
     htmlAst,
     fields: { dateModified },
   } = post;
+  const seoConfig = useSEOConfig();
+  const { siteUrl } = useSiteMetadata();
 
-  const { siteMetadata } = site;
+  const postLink = concatURL(siteUrl, location.pathname);
 
   return (
     <PostTemplate
       post={post}
-      siteMetadata={siteMetadata}
+      seoConfig={seoConfig}
+      postLink={postLink}
       body={renderAst(htmlAst)}
     />
   );
@@ -122,11 +122,11 @@ export default function Post({ location, data: { post, site } }) {
 /**
  * @param {object} props
  * @prop {GatsbyTypes.BlogPostFragment} props.post
- * @prop {GatsbyTypes.SiteSiteMetadata} props.siteMetadata
+ * @prop {GatsbyTypes.SEOConfigValuesFragment} props.seoConfig
  * @prop {string} props.postLink
  * @prop {object} props.body
  */
-export function PostTemplate({ post, siteMetadata, body }) {
+export function PostTemplate({ post, seoConfig, postLink, body }) {
   const {
     timeToRead,
     tableOfContents,
@@ -140,8 +140,30 @@ export function PostTemplate({ post, siteMetadata, body }) {
           // email, avatar
         },
       },
+      description,
+      hashtags,
     },
   } = post;
+
+  const { sharingButtons, socialAccounts } = seoConfig;
+
+  /** @type {ShareButton.Props[]} */
+  const shareButtonProps = Array.isArray(sharingButtons)
+    ? sharingButtons.map(name => ({
+        socialType: name,
+        accounts:
+          Array.isArray(socialAccounts) &&
+          socialAccounts
+            .filter(({ type }) => type === name)
+            .map(({ accountHandle }) => accountHandle),
+        postLink,
+        title,
+        description,
+        hashtags: Array.isArray(hashtags)
+          ? hashtags.map(({ hashtag }) => hashtag)
+          : undefined,
+      }))
+    : [];
 
   /**
    * TODO:
@@ -150,7 +172,7 @@ export function PostTemplate({ post, siteMetadata, body }) {
    * - Add Author information section
    */
   return (
-    <PostContext.Provider value={{ post, siteMetadata }}>
+    <PostContext.Provider value={{ shareButtonProps }}>
       <Layout>
         <article>
           <header>
@@ -164,6 +186,9 @@ export function PostTemplate({ post, siteMetadata, body }) {
                 </time>{' '}
                 &middot; {timeToRead} min read
               </p>
+              {/* <div>
+                <ShareButton  />
+              </div> */}
             </div>
           </header>
           {tableOfContents && (

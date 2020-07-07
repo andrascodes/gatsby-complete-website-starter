@@ -1,24 +1,10 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
 export const query = graphql`
-  fragment Metadata on SiteSiteMetadata {
-    siteUrl
-  }
-
-  fragment SocialSharingConfig on SiteSiteMetadata {
-    sharingButtons
-    socialAccounts {
-      type
-      url
-      accountHandle
-    }
-  }
-
   query SiteMetadata {
     site {
       siteMetadata {
-        ...Metadata
-        ...SocialSharingConfig
+        siteUrl
       }
     }
   }

@@ -53,6 +53,7 @@ const PostPreview = ({
         },
         timeToRead: 8,
       }}
+      seoConfig={['Facebook', 'Twitter', 'LinkedIn']}
       body={widgetFor('body')}
     />
   );

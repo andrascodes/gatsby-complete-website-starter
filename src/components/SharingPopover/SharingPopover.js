@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import { PostContext } from 'shared/contexts';
+import { SOCIAL_MEDIA_ACCOUNT_TYPES } from 'shared/constants';
 import ShareButton from 'components/ShareButton';
 
 import styles from './SharingPopover.module.less';
@@ -8,6 +9,11 @@ import concatURL from 'utils';
 
 export const POPOVER_WIDTH = 232;
 export const POPOVER_HEIGHT = 46;
+const ALLOWED_SOCIAL_SHARING = [
+  SOCIAL_MEDIA_ACCOUNT_TYPES.FACEBOOK,
+  SOCIAL_MEDIA_ACCOUNT_TYPES.TWITTER,
+  SOCIAL_MEDIA_ACCOUNT_TYPES.LINKEDIN,
+];
 
 /**
  * @param {object} props
@@ -24,28 +30,15 @@ export default function SharingPopover({
   text,
   onCopyButtonClick,
 }) {
-  const { post, siteMetadata } = useContext(PostContext);
+  const { shareButtonProps } = useContext(PostContext);
 
-  const { siteUrl, sharingButtons, socialAccounts } = siteMetadata;
-  const { description, hashtags, featuredImage } = post.frontmatter;
-  const featuredImageSrc = featuredImage.image.childImageSharp.resize.src;
-
-  const postLink = concatURL(siteUrl, location.pathname);
-  const media = concatURL(siteUrl, featuredImageSrc);
-
-  const sharingButtonProps = sharingButtons.map(name => ({
-    type: name,
-    accounts: socialAccounts
-      .filter(({ type }) => type === name)
-      .map(({ accountHandle }) => accountHandle),
-    postLink,
-    text,
-    description,
-    hashtags: Array.isArray(hashtags)
-      ? hashtags.map(({ hashtag }) => hashtag)
-      : [],
-    media,
-  }));
+  const popoverShareButtonProps = shareButtonProps
+    .filter(({ socialType }) => ALLOWED_SOCIAL_SHARING.includes(socialType))
+    .map(props => ({
+      ...props,
+      type: 'popover',
+      text,
+    }));
 
   return (
     <div
@@ -62,12 +55,18 @@ export default function SharingPopover({
       <div className={styles.actionsContainer}>
         <div className={styles.shareLinks}>
           <span className={styles.shareLabel}>Share:</span>
-          {sharingButtonProps.map(props => (
-            <ShareButton {...props} />
-          ))}
+          <div className={styles.shareButtonsContainer}>
+            {popoverShareButtonProps.map((props, index) => (
+              <ShareButton key={`sharePopoverButton-${index}`} {...props} />
+            ))}
+          </div>
         </div>
         <div className={styles.copyButtonContainer}>
-          <ShareButton type="copy" onClick={onCopyButtonClick} />
+          <ShareButton
+            type="popover"
+            socialType="copy"
+            onClick={onCopyButtonClick}
+          />
         </div>
       </div>
       <div className={styles.arrow} />

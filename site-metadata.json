@@ -1,16 +1,3 @@
 {
-  "siteUrl": "https://andrasszucs.me",
-  "sharingButtons": [
-    "Facebook",
-    "Twitter",
-    "Linkedin",
-    "Pinterest"
-  ],
-  "socialAccounts": [
-    {
-      "type": "Twitter",
-      "url": "https://twitter.com/andrewszucs",
-      "accountHandle": "andrewszucs"
-    }
-  ]
+  "siteUrl": "https://andrasszucs.me"
 }
