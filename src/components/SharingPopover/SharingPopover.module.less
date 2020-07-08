@@ -7,6 +7,9 @@
   z-index: 1;
   font-size: 18px;
   font-weight: 600;
+  transition: left 75ms ease-out, top 75ms ease-out;
+  animation: popUpwards 200ms forwards;
+  // box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.75);
 }
 
 .actionsContainer {
@@ -51,4 +54,27 @@
   border-right: 8px solid transparent;
   border-top: 8px solid @background-color-dark;
   transition: border-color 200ms;
+}
+
+@keyframes popUpwards {
+  0% {
+    transform: matrix(0.97, 0, 0, 1, 0, 12);
+    opacity: 0;
+  }
+  20% {
+    transform: matrix(0.99, 0, 0, 1, 0, 2);
+    opacity: 0.7;
+  }
+  40% {
+    transform: matrix(1, 0, 0, 1, 0, -1);
+    opacity: 1;
+  }
+  70% {
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    opacity: 1;
+  }
 }

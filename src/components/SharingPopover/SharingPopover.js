@@ -47,6 +47,7 @@ export default function SharingPopover({
         left: `${left}px`,
         top: `${top}px`,
         display: show ? 'flex' : 'none',
+        pointerEvents: show ? 'initial' : 'none',
         width: POPOVER_WIDTH,
         height: POPOVER_HEIGHT,
       }}
